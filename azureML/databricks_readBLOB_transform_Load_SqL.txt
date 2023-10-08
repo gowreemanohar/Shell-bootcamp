@@ -1,0 +1,98 @@
+// Databricks notebook source
+//Mount an azure BLOB Storage
+
+// COMMAND ----------
+
+val containerName = "dwtemp"
+val storageAccountName = "blobstoragedbricks"
+val sas = "?sv=2019-12-12&ss=bfqt&srt=sco&sp=rwdlacupx&se=2020-08-19T04:09:15Z&st=2020-08-18T20:09:15Z&spr=https&sig=tzk4iZuZQidN3K3Mw7%2FINtIEekwJWt1w0x09FNdpmGg%3D"
+val config = "fs.azure.sas." + containerName+ "." + storageAccountName + ".blob.core.windows.net"
+
+// COMMAND ----------
+
+//Setting up the connection by using DBUtils between Databricks and BLOB Storage
+
+// COMMAND ----------
+
+dbutils.fs.mount(
+  source = "wasbs://dwtemp@blobstoragedbricks.blob.core.windows.net/data_log.csv",
+  mountPoint = "/mnt/myfile",
+  extraConfigs = Map(config -> sas))
+
+// COMMAND ----------
+
+//Reading the data from CSV file. 
+
+// COMMAND ----------
+
+val mydf = spark.read
+.option("header","true")
+.option("inferSchema", "true")
+.csv("/mnt/myfile")
+display(mydf)
+
+// COMMAND ----------
+
+//JDBC URL Created, which contains information like SQL Server, DB Name, Port NUmber, User, and Password
+
+// COMMAND ----------
+
+val url = "jdbc:sqlserver://testservergm.database.windows.net:1433;database=db1;user=student@testservergm;password=Pa55w.rd"
+
+// COMMAND ----------
+
+//Creating properties by using Java.Util.Properties to link the parameters. 
+
+// COMMAND ----------
+
+import java.util.Properties
+val myproperties = new Properties()
+myproperties.put("user", "student")
+myproperties.put("password", "Pa55w.rd")
+
+// COMMAND ----------
+
+//The code below will help you to check the connectivity of the database. 
+
+// COMMAND ----------
+
+val driverClass = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+myproperties.setProperty("Driver", driverClass)
+
+// COMMAND ----------
+
+//Reading the Data 
+
+// COMMAND ----------
+
+val mydf = spark.read
+.option("header","true")
+.option("inferSchema", "true")
+.csv("/mnt/myfile")
+display(mydf)
+
+// COMMAND ----------
+
+//Transform 1 : Selecting Specific Cols. 
+
+// COMMAND ----------
+
+val selectspecificcolsdf = mydf.select("step", "type", "amount")
+display(selectspecificcolsdf)
+
+// COMMAND ----------
+
+//Transform 2 renaming a column by using functions. 
+
+// COMMAND ----------
+
+val renamedColsmyDF = selectspecificcolsdf.withColumnRenamed("type", "paytype")
+display(renamedColsmyDF)
+
+// COMMAND ----------
+
+//Writing data in SQL Server.
+
+// COMMAND ----------
+
+renamedColsmyDF.write.jdbc(url,"Payment",myproperties)

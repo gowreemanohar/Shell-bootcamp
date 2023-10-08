@@ -1,0 +1,6 @@
+Name,EmployeeID,Department,Building,Room
+First National Bank,122,Credit,6,1532
+First National Bank,261,Credit,6,2251
+First National Bank,431,Credit,6,5312
+Jackson Industry,3875,Manufacture,C,673
+Jackson Industry,2837,Manufacture,B,211
