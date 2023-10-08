@@ -1,0 +1,15 @@
+,Id,Oil And Gas Category,Oil And Gas Group,Oil And Gas Detail
+0,1,Oil,Liquids,Bitumen
+1,2,Condensate,Liquids,Condensate
+2,3,Oil,Liquids,Extra Heavy
+3,4,Gas,Gas,Gas
+4,5,Gas,Gas,Gas (compression yield)
+5,6,Oil,Liquids,Heavy 15-19
+6,8,Oil,Liquids,Light
+7,10,Other Liquids,Liquids,Other Liquids
+8,11,Refinery Gains,Liquids,Refinery Gains
+9,12,Oil,Liquids,Regular
+10,13,Unsold Gas (flaring),Unsold Gas,Unsold Gas (flaring)
+11,7,Oil,Liquids,Heavy 20-23
+12,14,Unsold Gas (injected),Unsold Gas,Unsold Gas (injected)
+13,9,NGL,Liquids,NGL

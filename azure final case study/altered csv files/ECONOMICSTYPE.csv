@@ -1,0 +1,15 @@
+,Id,Economics Group,Economics Category
+0,1,Opex,Abandonment cost
+1,2,Exploration Capex,Bonuses
+2,3,Exploration Capex,Exploration Capex
+3,4,Capex,Facility Capex
+4,5,Capex,FacilityCapex
+5,7,Government Take,Government Profit Oil
+6,8,Government Take,Income Tax
+7,11,Opex,SG&A Opex
+8,12,Opex,Taxes Opex
+9,13,Opex,Transportation Opex
+10,14,Capex,Well Capex
+11,6,Free Cash Flow,Free Cash Flow
+12,9,Opex,Production Opex
+13,10,Government Take,Royalty effects
